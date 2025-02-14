@@ -5,21 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "awesome_push",
+            "name": "Run",
             "request": "launch",
             "type": "dart"
-        },
-        {
-            "name": "awesome_push (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "awesome_push (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
         }
     ]
 }

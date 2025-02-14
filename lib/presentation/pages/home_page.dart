@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
             if (state.projects.isEmpty) {
               return const Center(
                 child: Text(
-                  'No projects found !',
+                  'Couldn\'t Find Projects!',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               );

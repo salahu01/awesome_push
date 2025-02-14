@@ -25,6 +25,55 @@ class HomeCubit extends HydratedCubit<HomeState> {
     );
   }
 
+  void addNotification(int projectIndex, NotificationModel notification) {
+    emit(
+      state.copyWith(
+        projects: [
+          for (final project in state.projects.asMap().entries)
+            if (project.key == projectIndex) project.value.copyWith(notifications: [...project.value.notifications, notification]) else project.value
+        ],
+      ),
+    );
+  }
+
+  void removeNotification(int projectIndex, int notificationIndex) {
+    emit(
+      state.copyWith(
+        projects: [
+          for (final project in state.projects.asMap().entries)
+            if (project.key == projectIndex)
+              project.value.copyWith(
+                notifications: [
+                  for (final notification in project.value.notifications.asMap().entries)
+                    if (notification.key != notificationIndex) notification.value
+                ],
+              )
+            else
+              project.value
+        ],
+      ),
+    );
+  }
+
+  void updateNotification(int projectIndex, int notificationIndex, NotificationModel newNotification) {
+    emit(
+      state.copyWith(
+        projects: [
+          for (final project in state.projects.asMap().entries)
+            if (project.key == projectIndex)
+              project.value.copyWith(
+                notifications: [
+                  for (final notification in project.value.notifications.asMap().entries)
+                    if (notification.key == notificationIndex) newNotification else notification.value
+                ],
+              )
+            else
+              project.value
+        ],
+      ),
+    );
+  }
+
   @override
   HomeState? fromJson(Map<String, dynamic> json) {
     return HomeState(

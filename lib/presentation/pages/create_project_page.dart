@@ -144,6 +144,7 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
                     serviceAccountJson: _serviceAccountJsonCtrl.text,
                     tokens: _tokensCtrl.text.split(','),
                     name: _projectNameCtrl.text,
+                    notifications: widget.project?.notifications ?? const [],
                   );
                   if (widget.project != null) {
                     context.read<HomeCubit>().updateProject(model);
@@ -154,7 +155,9 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
                   }
                 }
               },
-              child: const Text('Create Project'),
+              child: Text(
+                widget.project != null ? 'Update Project' : 'Create Project',
+              ),
             ),
           ),
         ),

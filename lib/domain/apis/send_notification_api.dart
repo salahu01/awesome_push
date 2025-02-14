@@ -36,12 +36,31 @@ Future<Either<ApiError, void>> sendMessages({
                   if (image?.isNotEmpty ?? false) "image": image,
                 },
               if (data != null) 'data': data,
+              // Handling tokens (single vs multiple)
               if (tokens.length == 1) "token": tokens.first else "tokens": tokens,
-              "android": {"priority": "high"}
+              // Android-specific settings
+              "android": {
+                "priority": "high",
+                "notification": {
+                  "sound": "notification_sound",
+                  "channel_id": "main_channel",
+                }
+              },
+              "apns": {
+                "headers": {
+                  "apns-priority": "10",
+                },
+                "payload": {
+                  "aps": {
+                    "sound": "notification_sound.caf",
+                  }
+                }
+              }
             }
           },
         );
       } on DioException catch (e) {
+        print(e.response?.data);
         return left(ApiError(message: e.response?.data.toString() ?? 'Went wrong', statusCode: e.response?.statusCode));
       }
 
